@@ -109,7 +109,6 @@ class BookApp {
      * Handles the theme change based on user input.
      *
      * @param {Event} event - The event triggering the theme change.
-     * @return {void} No return value.
      */
     handleThemeChange(event) {
         event.preventDefault();
@@ -148,6 +147,11 @@ class BookApp {
         document.querySelector('[data-search-overlay]').open = false;
     }
 
+    /**
+     * Renders a list of books based on the provided array of books.
+     *
+     * @param {Array} books - The array of books to render.
+     */
     renderBookList(books) {
         document.querySelector('[data-list-items]').innerHTML = '';
         const fragment = document.createDocumentFragment();
@@ -162,6 +166,10 @@ class BookApp {
         updateShowMoreButton(document.querySelector('[data-list-button]'), this.matches.length, this.page, this.booksPerPage);
     }
 
+    /**
+     * Renders additional books based on the current page and books per page settings.
+     *
+     */
     showMoreBooks() {
         const fragment = document.createDocumentFragment();
         for (const { author, id, image, title } of this.matches.slice(this.page * this.booksPerPage, (this.page + 1) * this.booksPerPage)) {
@@ -203,3 +211,4 @@ class BookApp {
 
 // Initialize the BookApp with data
 const bookApp = new BookApp({ books, authors, genres, booksPerPage: BOOKS_PER_PAGE });
+bookApp.init();
